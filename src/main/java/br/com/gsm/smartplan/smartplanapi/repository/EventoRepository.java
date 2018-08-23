@@ -5,13 +5,13 @@
  */
 package br.com.gsm.smartplan.smartplanapi.repository;
 
-
-import br.com.gsm.smartplan.smartplanapi.model.Professor;
+import br.com.gsm.smartplan.smartplanapi.model.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author Gabriel San Martin
+ * @author Aluno
  */
-public interface ProfessorRepository extends JpaRepository<Professor, Long>{
+public interface EventoRepository extends JpaRepository<Evento, Long>{
+    
 }
