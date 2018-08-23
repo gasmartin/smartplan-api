@@ -13,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author Gabriel San Martin
  */
-public interface ProfessorRepository  extends JpaRepository<Professor, Integer>{
+public interface ProfessorRepository  extends JpaRepository<Professor, Long>{
 }

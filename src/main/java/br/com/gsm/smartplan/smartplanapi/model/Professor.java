@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author Gabriel San Martin
+ */
+
 @Entity
 @Table(name="professor")
 public class Professor {
@@ -14,7 +19,7 @@ public class Professor {
 	@Id
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer id;
+	private Long id;
 	
 	@Column(name="nome")
 	private String nome;
@@ -24,7 +29,7 @@ public class Professor {
 	
 	@Column(name="senha")
 	private String senha;
-	
+        	
 	private static Professor instance;
 	
 	public static Professor getInstance() {
@@ -33,11 +38,8 @@ public class Professor {
 		}
 		return instance;
 	}
-	
-        public void setId(Integer id){
-            this.id = id;
-        }
-	public Integer getId() {
+
+	public Long getId() {
 		return this.id;
 	}
 	

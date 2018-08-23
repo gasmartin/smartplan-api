@@ -3,10 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gsm.smartplan.smartplanapi.Exception;
+package br.com.gsm.smartplan.smartplanapi.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
+
+/**
+ *
+ * @author Gabriel San Martin
+ */
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND, code = HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {
