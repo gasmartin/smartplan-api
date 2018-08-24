@@ -17,11 +17,12 @@ import javax.persistence.Table;
 public class Planejamento {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "cor")
-    private int cor;
+    private Integer cor;
 
     @Column(name = "nome")
     private String nome;
@@ -44,11 +45,11 @@ public class Planejamento {
         return instance;
     }
 
-    public int getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public int getCor() {
+    public Integer getCor() {
         return this.cor;
     }
 
@@ -87,6 +88,5 @@ public class Planejamento {
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
     }
-    
-    
+
 }

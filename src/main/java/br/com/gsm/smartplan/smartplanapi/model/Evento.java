@@ -18,7 +18,7 @@ public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
@@ -27,7 +27,7 @@ public class Evento {
     private String descricao;
 
     @Column(name = "tipo")
-    private char tipo;
+    private Character tipo;
 
     @Column(name = "data_evento")
     private Date dataEvento;
@@ -41,7 +41,7 @@ public class Evento {
         return instance;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -61,11 +61,11 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public char getTipo() {
+    public Character getTipo() {
         return tipo;
     }
 
-    public void setTipo(char tipo) {
+    public void setTipo(Character tipo) {
         this.tipo = tipo;
     }
 
