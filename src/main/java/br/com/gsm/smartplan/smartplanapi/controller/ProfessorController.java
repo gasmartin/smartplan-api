@@ -23,46 +23,40 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Gabriel San Martin
  */
-
 @RestController
 @RequestMapping("/professores")
 public class ProfessorController {
 
     @Autowired
     ProfessorRepository professorRepository;
-    
+
+    //Apenas um teste
     @RequestMapping("/efetuarLogin")
-    public String efetuarLogin(Professor professor, HttpSession session){
-        String resultado;
-        
-        if(professorRepository.existsById(professor.getId())) resultado = "Sim";
-        else resultado = "Nao";
-        
-        return resultado;
- 
+    public String efetuarLogin(Professor professor, HttpSession session) {
+        return (professorRepository.existsById(professor.getId()) ? "Existe!" : "Nao existe!");
     }
-    
+
     //Retorna dados de um determinado professor.
-    @RequestMapping(method = RequestMethod.GET, path="/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(professorRepository.findById(id), HttpStatus.OK);
     }
-    
+
     //Retorna todos os professores.
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> listOfProfessores() {
         return new ResponseEntity<>(professorRepository.findAll(), HttpStatus.OK);
     }
-    
+
     //Cria um professor
-    @RequestMapping(method = RequestMethod.POST, path="/cadastrar")
-    public Professor insert(@Valid @RequestBody Professor professor) {
-        return professorRepository.save(professor);
+    @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
+    public ResponseEntity<?> insert(@Valid @RequestBody Professor professor) {
+        return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
-    
+
     //Atualiza um determinado professor
-    @RequestMapping(method = RequestMethod.PUT, path="/{id}")
-    public Professor updateConceito(@PathVariable("id") Long professor_id,
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    public ResponseEntity<?> updateConceito(@PathVariable("id") Long professor_id,
             @Valid @RequestBody Professor professor_details) {
 
         Professor professor = professorRepository.findById(professor_id)
@@ -72,11 +66,10 @@ public class ProfessorController {
         professor.setEmail(professor_details.getEmail());
         professor.setSenha(professor_details.getSenha());
 
-        Professor professorUpdate = professorRepository.save(professor);
-        return professorUpdate;
+        return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
-    
-    @RequestMapping(method = RequestMethod.DELETE, path="/{id}")
+
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public ResponseEntity<?> deleteProfessor(@PathVariable("id") Long professor_id) {
         Professor professor = professorRepository.findById(professor_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Professor", "id", professor_id));
@@ -85,5 +78,5 @@ public class ProfessorController {
 
         return ResponseEntity.ok().build();
     }
-    
+
 }
