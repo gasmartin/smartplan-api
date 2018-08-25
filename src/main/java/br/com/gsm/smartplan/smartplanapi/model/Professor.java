@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
 
 /**
  *
@@ -13,7 +15,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="professor")
+@Table(name="Professor", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class Professor {
 	
 	@Id
@@ -21,6 +23,7 @@ public class Professor {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+        @NotEmpty
 	@Column(name="nome")
 	private String nome;
 	
@@ -30,14 +33,14 @@ public class Professor {
 	@Column(name="senha")
 	private String senha;
         	
-	private static Professor instance;
-	
-	public static Professor getInstance() {
-		if(instance == null) {	
-			instance = new Professor();
-		}
-		return instance;
-	}
+//	private static Professor instance;
+//	
+//	public static Professor getInstance() {
+//		if(instance == null) {	
+//			instance = new Professor();
+//		}
+//		return instance;
+//	}
 
 	public Long getId() {
 		return this.id;

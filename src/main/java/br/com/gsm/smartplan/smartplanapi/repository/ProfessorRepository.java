@@ -7,11 +7,11 @@ package br.com.gsm.smartplan.smartplanapi.repository;
 
 
 import br.com.gsm.smartplan.smartplanapi.model.Professor;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  *
  * @author Gabriel San Martin
  */
-public interface ProfessorRepository extends JpaRepository<Professor, Long>{
+public interface ProfessorRepository extends CrudRepository<Professor, Long>{
 }
