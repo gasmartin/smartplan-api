@@ -7,10 +7,13 @@ package br.com.gsm.smartplan.smartplanapi.repository;
 
 import br.com.gsm.smartplan.smartplanapi.model.Turma;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Aluno
  */
+
+@Component
 public interface TurmaRepository extends JpaRepository<Turma, Long>{
 }

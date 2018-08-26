@@ -8,12 +8,14 @@ package br.com.gsm.smartplan.smartplanapi.repository;
 
 import br.com.gsm.smartplan.smartplanapi.model.Professor;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Gabriel San Martin
  */
+
+@Component
 public interface ProfessorRepository extends CrudRepository<Professor, Long>{
-    
     public Professor getByEmail(String email);
 }

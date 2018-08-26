@@ -7,11 +7,14 @@ package br.com.gsm.smartplan.smartplanapi.repository;
 
 import br.com.gsm.smartplan.smartplanapi.model.Evento;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Aluno
  */
+
+@Component
 public interface EventoRepository extends JpaRepository<Evento, Long>{
     
 }

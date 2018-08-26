@@ -30,9 +30,15 @@ public class ProfessorController {
     private ProfessorRepository professorRepository;
 
     //Retorna dados de um determinado professor através do e-mail.
-    @RequestMapping(method = RequestMethod.GET, path = "/executar_login/{email}")
-    public ResponseEntity<?> getByEmail(@PathVariable("email") String email) {
-        return new ResponseEntity<>(professorRepository.getByEmail(email), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.GET, path = "/executar_login/{email}/{senha}")
+    public ResponseEntity<?> getByEmail(@PathVariable("email") String email, @PathVariable("senha") String senha) {
+        Professor professor;
+        professor = Professor.getInstance();
+        professor = professorRepository.getByEmail(email);
+        if(professor != null){
+            if(professor.getSenha().equals(senha)) return new ResponseEntity<>(professor, HttpStatus.OK);
+        } 
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
     //Retorna dados de um determinado professor.
