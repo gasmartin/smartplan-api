@@ -23,28 +23,31 @@ public class Professor {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-        @NotEmpty
 	@Column(name="nome")
 	private String nome;
 	
-	@Column(name="email")
+	@Column(name="email", unique=true)
 	private String email;
 	
 	@Column(name="senha")
 	private String senha;
         	
-//	private static Professor instance;
-//	
-//	public static Professor getInstance() {
-//		if(instance == null) {	
-//			instance = new Professor();
-//		}
-//		return instance;
-//	}
+	private static Professor instance;
+	
+	public static Professor getInstance() {
+		if(instance == null) {	
+			instance = new Professor();
+		}
+		return instance;
+	}
 
 	public Long getId() {
 		return this.id;
 	}
+        
+        public void setId(){
+            this.id = id;
+        }
 	
 	public String getNome() {
 		return this.nome;

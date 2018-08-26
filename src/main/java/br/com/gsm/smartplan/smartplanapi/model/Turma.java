@@ -41,6 +41,10 @@ public class Turma {
     public Long getId() {
         return this.id;
     }
+    
+    public void setId(){
+        this.id = id;
+    }
 
     public Integer getCor() {
         return this.cor;

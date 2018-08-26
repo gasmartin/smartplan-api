@@ -14,4 +14,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author Gabriel San Martin
  */
 public interface ProfessorRepository extends CrudRepository<Professor, Long>{
+    
+    public Professor getByEmail(String email);
 }
