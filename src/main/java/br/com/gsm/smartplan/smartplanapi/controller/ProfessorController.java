@@ -31,7 +31,7 @@ public class ProfessorController {
 
     //Retorna dados de um determinado professor através do e-mail.
     @RequestMapping(method = RequestMethod.GET, path = "/executar_login/{email}/{senha}")
-    public ResponseEntity<?> getByEmail(@PathVariable("email") String email, @PathVariable("senha") String senha) {
+    public ResponseEntity<?> login(@PathVariable("email") String email, @PathVariable("senha") String senha) {
         Professor professor;
         professor = Professor.getInstance();
         professor = professorRepository.getByEmail(email);
@@ -53,15 +53,15 @@ public class ProfessorController {
         return new ResponseEntity<>(professorRepository.findAll(), HttpStatus.OK);
     }
 
-    //Cria um professor
+    //Cria um professor.
     @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
-    public ResponseEntity<?> insert(@Valid @RequestBody Professor professor) {
+    public ResponseEntity<?> insertProfessor(@Valid @RequestBody Professor professor) {
         return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
 
-    //Atualiza um determinado professor
+    //Atualiza um determinado professor.
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<?> updateConceito(@PathVariable("id") Long professor_id,
+    public ResponseEntity<?> updateProfessor(@PathVariable("id") Long professor_id,
             @Valid @RequestBody Professor professor_details) {
 
         Professor professor = professorRepository.findById(professor_id)
@@ -73,7 +73,8 @@ public class ProfessorController {
 
         return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
-
+    
+    //Deleta um professor.
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public ResponseEntity<?> deleteProfessor(@PathVariable("id") Long professor_id) {
         Professor professor = professorRepository.findById(professor_id)
