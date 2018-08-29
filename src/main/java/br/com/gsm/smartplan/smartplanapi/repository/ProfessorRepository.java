@@ -7,7 +7,7 @@ package br.com.gsm.smartplan.smartplanapi.repository;
 
 
 import br.com.gsm.smartplan.smartplanapi.model.Professor;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +16,6 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public interface ProfessorRepository extends CrudRepository<Professor, Long>{
+public interface ProfessorRepository extends JpaRepository<Professor, Long>{
     public Professor getByEmail(String email);
 }
