@@ -1,11 +1,14 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -14,23 +17,27 @@ import javax.persistence.Table;
  * @author Gabriel San Martin
  */
 @Entity
-@Table(name="aluno")
+@Table(name = "alunos")
 public class Aluno {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name="nome")
+    @Column(name = "nome")
     private String nome;
 
-    @Column(name="obs")
+    @Column(name = "obs")
     private String obs;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
+    
+    @ManyToOne
+    private Turma turma;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "aluno")
     private List<Nota> notas;
 
     private static Aluno instance;
@@ -45,8 +52,8 @@ public class Aluno {
     public Long getId() {
         return id;
     }
-    
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,6 +79,14 @@ public class Aluno {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
     }
 
 }

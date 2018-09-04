@@ -5,28 +5,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
  *
  * @author Gabriel San Martin
  */
-
 @Entity
-@Table(name="nota")
+@Table(name = "notas")
 public class Nota {
-    
+
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @Column(name="nota")
+
+    @Column(name = "nota")
     private Double nota;
     
+    @ManyToOne
+    private Aluno aluno;
+
     private static Nota instance;
-    
-    public static Nota getInstance(){
-        if(instance == null){
+
+    public static Nota getInstance() {
+        if (instance == null) {
             instance = new Nota();
         }
         return instance;
@@ -35,8 +39,8 @@ public class Nota {
     public Long getId() {
         return id;
     }
-    
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -47,6 +51,6 @@ public class Nota {
     public void setNota(Double nota) {
         this.nota = nota;
     }
-    
+
     
 }

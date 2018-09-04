@@ -5,15 +5,20 @@ package br.com.gsm.smartplan.smartplanapi.model;
  * @author Gabriel San Martin
  */
 import java.sql.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "planejamento")
+@Table(name = "planejamentos")
 public class Planejamento {
 
     @Id
@@ -35,6 +40,12 @@ public class Planejamento {
 
     @Column(name = "data_final")
     private Date dataFinal;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "planejamento")
+    private List<Evento> eventos;
+    
+    @ManyToOne
+    private Professor professor;
 
     private static Planejamento instance;
 
@@ -46,23 +57,23 @@ public class Planejamento {
     }
 
     public Long getId() {
-        return this.id;
+        return id;
     }
-    
-    public void setId(Long id){
+
+    public void setId(Long id) {
         this.id = id;
     }
 
     public Integer getCor() {
-        return this.cor;
+        return cor;
     }
 
-    public void setCor(int cor) {
+    public void setCor(Integer cor) {
         this.cor = cor;
     }
 
     public String getNome() {
-        return this.nome;
+        return nome;
     }
 
     public void setNome(String nome) {
@@ -70,7 +81,7 @@ public class Planejamento {
     }
 
     public String getDescricao() {
-        return this.descricao;
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
@@ -92,5 +103,15 @@ public class Planejamento {
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
     }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
+    
+    
 
 }
