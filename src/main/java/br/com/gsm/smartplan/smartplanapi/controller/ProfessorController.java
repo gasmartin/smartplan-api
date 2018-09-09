@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Gabriel San Martin
  */
 @RestController
-@RequestMapping("/professores")
+@RequestMapping("/professor")
 public class ProfessorController {
 
     @Autowired
@@ -54,7 +54,7 @@ public class ProfessorController {
     }
 
     //Cria um professor.
-    @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
+    @RequestMapping(method = RequestMethod.POST, path = "/insert")
     public ResponseEntity<?> insertProfessor(@Valid @RequestBody Professor professor) {
         return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
