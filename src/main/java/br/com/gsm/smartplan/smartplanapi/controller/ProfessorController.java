@@ -50,7 +50,7 @@ public class ProfessorController {
     }
 
     //Retorna todos os professores.
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, path="/professor")
     public ResponseEntity<?> listOfProfessores() {
         return new ResponseEntity<>(professorRepository.findAll(), HttpStatus.OK);
     }
