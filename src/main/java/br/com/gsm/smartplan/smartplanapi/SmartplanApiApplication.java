@@ -20,12 +20,16 @@ public class SmartplanApiApplication implements CommandLineRunner {
     
     @Autowired
     private ProfessorRepository professorRepository;
+    
+    @Autowired
+    private TurmaRepository turmaRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SmartplanApiApplication.class, args);
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         log.info("API iniciada com sucesso! Pode relaxar, Gabriel");
 

@@ -1,10 +1,12 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,6 +25,11 @@ public class Nota {
 
     @Column(name = "nota")
     private Double nota;
+
+    @ManyToOne
+    @JoinColumn(name = "aluno_id")
+    @JsonIgnore
+    private Aluno aluno;
 
     private static Nota instance;
 
@@ -49,5 +56,12 @@ public class Nota {
         this.nota = nota;
     }
 
-    
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
 }

@@ -1,14 +1,13 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
-import java.util.List;
-import javax.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,9 +31,11 @@ public class Aluno {
 
     @Column(name = "email")
     private String email;
-    
-    @OneToMany(cascade=CascadeType.ALL)
-    private List<Nota> notas;
+
+    @ManyToOne
+    @JoinColumn(name = "turma_id")
+    @JsonIgnore
+    private Turma turma;
 
     private static Aluno instance;
 
@@ -77,11 +78,12 @@ public class Aluno {
         this.email = email;
     }
 
-    public List<Nota> getNotas() {
-        return notas;
+    public Turma getTurma() {
+        return turma;
     }
 
-    public void setNotas(List<Nota> notas) {
-        this.notas = notas;
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
+
 }

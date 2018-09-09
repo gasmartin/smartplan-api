@@ -47,8 +47,9 @@ public class TurmaController {
     }
  
     //Cria uma turma.
-    @RequestMapping(method = RequestMethod.POST, path = "/turma/insert")
-    public ResponseEntity<?> insertTurma(@Valid @RequestBody Turma turma) {
+    @RequestMapping(method = RequestMethod.POST, path = "/turma/insert/{id}")
+    public ResponseEntity<?> insertTurma(@Valid @RequestBody Turma turma, @PathVariable("id") Long id) {
+        turma.setProfessor(professorRepository.findById(id).get());
         return new ResponseEntity<>(turmaRepository.save(turma), HttpStatus.OK);
     }
 
@@ -82,6 +83,6 @@ public class TurmaController {
     @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}/turmas")
     @Transactional
     public ResponseEntity<?> getAllTurmasByProfessorId(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(professorRepository.findById(id).get().getTurmas(), HttpStatus.OK);
+        return new ResponseEntity<>(turmaRepository.findByProfessorId(id), HttpStatus.OK);
     }
 }
