@@ -17,10 +17,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SmartplanApiApplication implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(SmartplanApiApplication.class);
-    
+
     @Autowired
     private ProfessorRepository professorRepository;
-    
+
     @Autowired
     private TurmaRepository turmaRepository;
 
@@ -35,5 +35,25 @@ public class SmartplanApiApplication implements CommandLineRunner {
 
         String ip = InetAddress.getLocalHost().getHostAddress();
         log.info("IP do servidor: " + ip);
+    }
+
+    //Uils para apresentação
+    private Professor returnProfessor(String nome, String email, String senha) {
+        Professor professor = Professor.getInstance();
+        professor.setNome(nome);
+        professor.setEmail(email);
+        professor.setSenha(senha);
+
+        return professor;
+    }
+
+    private Turma returnTurma(Integer cor, Integer sala, String nome, Long professorId) {
+        Turma turma = Turma.getInstance();
+        turma.setCor(cor);
+        turma.setSala(sala);
+        turma.setNome(nome);
+        turma.setProfessor(professorRepository.findById(professorId).get());
+
+        return turma;
     }
 }
