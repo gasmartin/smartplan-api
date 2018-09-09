@@ -23,32 +23,32 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Gabriel San Martin
  */
 @RestController
-@RequestMapping("/alunos")
+@RequestMapping("/api")
 public class AlunoController {
 
     @Autowired
     private AlunoRepository alunoRepository;
 
     //Retorna dados de um determinado aluno.
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/aluno/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(alunoRepository.findById(id), HttpStatus.OK);
     }
 
     //Retorna todos os planejamentos.
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, path = "/aluno")
     public ResponseEntity<?> listOfAlunos() {
         return new ResponseEntity<>(alunoRepository.findAll(), HttpStatus.OK);
     }
 
     //Cria um planejamento.
-    @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
+    @RequestMapping(method = RequestMethod.POST, path = "/aluno/insert")
     public ResponseEntity<?> insertAluno(@Valid @RequestBody Aluno aluno) {
         return new ResponseEntity<>(alunoRepository.save(aluno), HttpStatus.OK);
     }
 
     //Atualiza um determinado professor.
-    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/aluno/{id}")
     public ResponseEntity<?> updateAluno(@PathVariable("id") Long aluno_id,
             @Valid @RequestBody Aluno aluno_details) {
 
@@ -66,7 +66,7 @@ public class AlunoController {
     }
 
     //Deleta um planejamento.
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/aluno/{id}")
     public ResponseEntity<?> deleteAluno(@PathVariable("id") Long aluno_id) {
         Aluno aluno = alunoRepository.findById(aluno_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Aluno", "id", aluno_id));

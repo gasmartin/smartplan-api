@@ -7,9 +7,7 @@ package br.com.gsm.smartplan.smartplanapi.controller;
 
 import br.com.gsm.smartplan.smartplanapi.exception.ResourceNotFoundException;
 import br.com.gsm.smartplan.smartplanapi.model.Evento;
-import br.com.gsm.smartplan.smartplanapi.model.Turma;
 import br.com.gsm.smartplan.smartplanapi.repository.EventoRepository;
-import br.com.gsm.smartplan.smartplanapi.repository.TurmaRepository;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,45 +23,43 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Gabriel San Martin
  */
 @RestController
-@RequestMapping("/eventos")
+@RequestMapping("/api")
 public class EventoController {
 
     @Autowired
     private EventoRepository eventoRepository;
 
     //Retorna dados de um determinado evento.
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/evento/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(eventoRepository.findById(id), HttpStatus.OK);
     }
 
     //Retorna todos os eventos.
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, path = "/evento")
     public ResponseEntity<?> listOfEventos() {
         return new ResponseEntity<>(eventoRepository.findAll(), HttpStatus.OK);
     }
 
     //Cria um evento.
-    @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
+    @RequestMapping(method = RequestMethod.POST, path = "/evento/insert")
     public ResponseEntity<?> insertEvento(@Valid @RequestBody Evento evento) {
         return new ResponseEntity<>(eventoRepository.save(evento), HttpStatus.OK);
     }
 
     //Atualiza um determinado evento.
-    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/evento/{id}")
     public ResponseEntity<?> updateEvento(@PathVariable("id") Long evento_id,
             @Valid @RequestBody Evento evento_details) {
 
         Evento evento = eventoRepository.findById(evento_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Evento", "evento", evento_id));
         
-        
-
         return new ResponseEntity<>(eventoRepository.save(evento), HttpStatus.OK);
     }
 
     //Deleta um evento.
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/evento/{id}")
     public ResponseEntity<?> deleteEvento(@PathVariable("id") Long evento_id) {
         Evento evento = eventoRepository.findById(evento_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Evento", "id", evento_id));

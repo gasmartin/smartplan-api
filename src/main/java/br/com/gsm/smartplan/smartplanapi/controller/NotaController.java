@@ -23,32 +23,32 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Gabriel San Martin
  */
 @RestController
-@RequestMapping("/notas")
+@RequestMapping("/api")
 public class NotaController {
     
     @Autowired
     private NotaRepository notaRepository;
 
     //Retorna dados de uma determinada nota.
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/nota/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(notaRepository.findById(id), HttpStatus.OK);
     }
 
     //Retorna todas as notas.
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, path = "/nota")
     public ResponseEntity<?> listOfNotas() {
         return new ResponseEntity<>(notaRepository.findAll(), HttpStatus.OK);
     }
 
     //Cria uma nota.
-    @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
+    @RequestMapping(method = RequestMethod.POST, path = "/nota/insert")
     public ResponseEntity<?> insertNota(@Valid @RequestBody Nota nota) {
         return new ResponseEntity<>(notaRepository.save(nota), HttpStatus.OK);
     }
 
     //Atualiza uma determinada nota.
-    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/nota/{id}")
     public ResponseEntity<?> updateNota(@PathVariable("id") Long nota_id,
             @Valid @RequestBody Nota nota_details) {
         
@@ -61,7 +61,7 @@ public class NotaController {
     }
 
     //Deleta uma nota.
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/nota/{id}")
     public ResponseEntity<?> deleteNota(@PathVariable("id") Long nota_id) {
         Nota nota = notaRepository.findById(nota_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Nota", "id", nota_id));

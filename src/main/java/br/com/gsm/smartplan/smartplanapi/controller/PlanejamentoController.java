@@ -24,32 +24,32 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/planejamentos")
+@RequestMapping("/api")
 public class PlanejamentoController {
     
     @Autowired
     private PlanejamentoRepository planejamentoRepository;
 
     //Retorna dados de um determinado planejamento.
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/planejamento/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(planejamentoRepository.findById(id), HttpStatus.OK);
     }
 
     //Retorna todos os planejamentos.
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, path = "/planejamento")
     public ResponseEntity<?> listOfPlanejamentos() {
         return new ResponseEntity<>(planejamentoRepository.findAll(), HttpStatus.OK);
     }
 
     //Cria um planejamento.
-    @RequestMapping(method = RequestMethod.POST, path = "/cadastrar")
+    @RequestMapping(method = RequestMethod.POST, path = "/planejamento/insert")
     public ResponseEntity<?> insertPlanejamento(@Valid @RequestBody Planejamento planejamento) {
         return new ResponseEntity<>(planejamentoRepository.save(planejamento), HttpStatus.OK);
     }
 
     //Atualiza um determinado professor.
-    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/planejamento/{id}")
     public ResponseEntity<?> updatePlanejamento(@PathVariable("id") Long planejamento_id,
             @Valid @RequestBody Planejamento planejamento_details) {
 
@@ -66,7 +66,7 @@ public class PlanejamentoController {
     }
     
     //Deleta um planejamento.
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/planejamento/{id}")
     public ResponseEntity<?> deletePlanejamento(@PathVariable("id") Long planejamento_id) {
         Planejamento planejamento = planejamentoRepository.findById(planejamento_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Planejamento", "id", planejamento_id));

@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Gabriel San Martin
  */
 @RestController
-@RequestMapping("/professor")
+@RequestMapping("/api")
 public class ProfessorController {
 
     @Autowired
     private ProfessorRepository professorRepository;
 
     //Retorna dados de um determinado professor através do e-mail.
-    @RequestMapping(method = RequestMethod.GET, path = "/executar_login/{email}/{senha}")
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/executar_login/{email}/{senha}")
     public ResponseEntity<?> login(@PathVariable("email") String email, @PathVariable("senha") String senha) {
         Professor professor;
         professor = Professor.getInstance();
@@ -42,7 +42,7 @@ public class ProfessorController {
     }
 
     //Retorna dados de um determinado professor.
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(professorRepository.findById(id), HttpStatus.OK);
     }
@@ -54,13 +54,13 @@ public class ProfessorController {
     }
 
     //Cria um professor.
-    @RequestMapping(method = RequestMethod.POST, path = "/insert")
+    @RequestMapping(method = RequestMethod.POST, path = "/professor/insert")
     public ResponseEntity<?> insertProfessor(@Valid @RequestBody Professor professor) {
         return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
 
     //Atualiza um determinado professor.
-    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/professor/{id}")
     public ResponseEntity<?> updateProfessor(@PathVariable("id") Long professor_id,
             @Valid @RequestBody Professor professor_details) {
 
@@ -75,7 +75,7 @@ public class ProfessorController {
     }
     
     //Deleta um professor.
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/professor/{id}")
     public ResponseEntity<?> deleteProfessor(@PathVariable("id") Long professor_id) {
         Professor professor = professorRepository.findById(professor_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Professor", "id", professor_id));
