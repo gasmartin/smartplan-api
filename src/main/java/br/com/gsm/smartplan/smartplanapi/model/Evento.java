@@ -36,9 +36,6 @@ public class Evento {
     @Column(name = "data_evento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEvento;
-    
-    @ManyToOne
-    private Planejamento planejamento;
 
     private static Evento instance;
 

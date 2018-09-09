@@ -23,9 +23,6 @@ public class Nota {
 
     @Column(name = "nota")
     private Double nota;
-    
-    @ManyToOne
-    private Aluno aluno;
 
     private static Nota instance;
 

@@ -5,12 +5,15 @@ package br.com.gsm.smartplan.smartplanapi.model;
  * @author Gabriel San Martin
  */
 import java.sql.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -36,9 +39,9 @@ public class Planejamento {
 
     @Column(name = "data_final")
     private Date dataFinal;
-
-    @ManyToOne
-    private Professor professor;
+    
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Evento> eventos;
 
     private static Planejamento instance;
 
@@ -95,6 +98,14 @@ public class Planejamento {
 
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
     }
 
 }

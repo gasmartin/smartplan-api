@@ -1,11 +1,13 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -29,9 +31,9 @@ public class Turma {
 
     @Column(name = "nome")
     private String nome;
-
-    @ManyToOne
-    private Professor professor;
+    
+    @OneToMany(cascade=CascadeType.ALL)
+    private List<Aluno> alunos;
 
     private static Turma instance;
 
@@ -41,7 +43,7 @@ public class Turma {
         }
         return instance;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -74,12 +76,11 @@ public class Turma {
         this.nome = nome;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
-
 }

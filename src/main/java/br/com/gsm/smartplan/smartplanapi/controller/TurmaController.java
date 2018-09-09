@@ -7,7 +7,9 @@ package br.com.gsm.smartplan.smartplanapi.controller;
 
 import br.com.gsm.smartplan.smartplanapi.exception.ResourceNotFoundException;
 import br.com.gsm.smartplan.smartplanapi.model.Turma;
+import br.com.gsm.smartplan.smartplanapi.repository.ProfessorRepository;
 import br.com.gsm.smartplan.smartplanapi.repository.TurmaRepository;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class TurmaController {
+    
+    @Autowired
+    private ProfessorRepository professorRepository;
 
     @Autowired
     private TurmaRepository turmaRepository;
@@ -40,14 +45,14 @@ public class TurmaController {
     public ResponseEntity<?> listOfTurmas() {
         return new ResponseEntity<>(turmaRepository.findAll(), HttpStatus.OK);
     }
-
-    //Cria um planejamento.
+ 
+    //Cria uma turma.
     @RequestMapping(method = RequestMethod.POST, path = "/turma/insert")
     public ResponseEntity<?> insertTurma(@Valid @RequestBody Turma turma) {
         return new ResponseEntity<>(turmaRepository.save(turma), HttpStatus.OK);
     }
 
-    //Atualiza um determinado professor.
+    //Atualiza uma determinada turma.
     @RequestMapping(method = RequestMethod.PUT, path = "/turma/{id}")
     public ResponseEntity<?> updateTurma(@PathVariable("id") Long turma_id,
             @Valid @RequestBody Turma turma_details) {
@@ -71,5 +76,12 @@ public class TurmaController {
         turmaRepository.delete(turma);
 
         return ResponseEntity.ok().build();
+    }
+    
+    //Retorna turmas de um determinado professor.
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}/turmas")
+    @Transactional
+    public ResponseEntity<?> getAllTurmasByProfessorId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(professorRepository.findById(id).get().getTurmas(), HttpStatus.OK);
     }
 }

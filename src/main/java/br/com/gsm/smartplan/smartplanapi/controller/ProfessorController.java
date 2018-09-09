@@ -35,9 +35,11 @@ public class ProfessorController {
         Professor professor;
         professor = Professor.getInstance();
         professor = professorRepository.getByEmail(email);
-        if(professor != null){
-            if(professor.getSenha().equals(senha)) return new ResponseEntity<>(professor, HttpStatus.OK);
-        } 
+        if (professor != null) {
+            if (professor.getSenha().equals(senha)) {
+                return new ResponseEntity<>(professor, HttpStatus.OK);
+            }
+        }
         return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
     }
 
@@ -73,7 +75,7 @@ public class ProfessorController {
 
         return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
-    
+
     //Deleta um professor.
     @RequestMapping(method = RequestMethod.DELETE, path = "/professor/{id}")
     public ResponseEntity<?> deleteProfessor(@PathVariable("id") Long professor_id) {

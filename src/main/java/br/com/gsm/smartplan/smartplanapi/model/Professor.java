@@ -1,10 +1,17 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +35,14 @@ public class Professor {
 
     @Column(name = "senha")
     private String senha;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "professor_id")
+    private List<Turma> turmas = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "professor_id")
+    private List<Planejamento> planejamentos;
 
     private static Professor instance;
 
@@ -70,4 +85,19 @@ public class Professor {
         this.senha = senha;
     }
 
+    public List<Turma> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
+    }
+
+    public List<Planejamento> getPlanejamentos() {
+        return planejamentos;
+    }
+
+    public void setPlanejamentos(List<Planejamento> planejamentos) {
+        this.planejamentos = planejamentos;
+    }
 }
