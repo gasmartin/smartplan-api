@@ -23,19 +23,27 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cor")
+    @Column(name = "cor", nullable = true, columnDefinition = "default 1")
     private Integer cor;
 
-    @Column(name = "sala")
+    @Column(name = "sala", nullable = true)
     private Integer sala;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, length = 20)
     private String nome;
+    
+    @Column(name = "descricao", nullable = true, length = 100)
+    private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
     @JsonIgnore
     private Professor professor;
+    
+    @ManyToOne
+    @JoinColumn(name = "planejamento_id")
+    @JsonIgnore
+    private Planejamento planejamento;
 
     private static Turma instance;
 
@@ -84,5 +92,21 @@ public class Turma {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public Planejamento getPlanejamento() {
+        return planejamento;
+    }
+
+    public void setPlanejamento(Planejamento planejamento) {
+        this.planejamento = planejamento;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

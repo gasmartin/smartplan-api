@@ -20,13 +20,13 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, length = 20)
     private String nome;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "username", unique = true, nullable = false, length = 20)
     private String username;
 
-    @Column(name = "senha")
+    @Column(name = "senha", nullable = false, length = 20)
     private String senha;
 
     private static Professor instance;

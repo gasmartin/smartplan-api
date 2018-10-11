@@ -24,13 +24,13 @@ public class Planejamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cor")
+    @Column(name = "cor", nullable = true, columnDefinition = "default 1")
     private Integer cor;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, length = 20)
     private String nome;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", nullable = true, length = 100)
     private String descricao;
 
     @Column(name = "data_inicio")

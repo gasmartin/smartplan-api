@@ -23,10 +23,10 @@ public class Aluno {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false, length = 20)
     private String nome;
 
-    @Column(name = "obs")
+    @Column(name = "obs", nullable = true, length = 50)
     private String obs;
 
     @Column(name = "email")
