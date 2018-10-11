@@ -41,7 +41,7 @@ public class SmartplanApiApplication implements CommandLineRunner {
     private Professor returnProfessor(String nome, String email, String senha) {
         Professor professor = Professor.getInstance();
         professor.setNome(nome);
-        professor.setEmail(email);
+        //professor.setEmail(email);
         professor.setSenha(senha);
 
         return professor;

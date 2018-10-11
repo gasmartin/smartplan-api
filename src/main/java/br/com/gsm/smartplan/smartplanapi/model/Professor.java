@@ -23,8 +23,8 @@ public class Professor {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "email", unique = true)
-    private String email;
+    @Column(name = "username", unique = true)
+    private String username;
 
     @Column(name = "senha")
     private String senha;
@@ -53,13 +53,13 @@ public class Professor {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getEmail() {
-        return email;
+    
+    public String getUsername(){
+        return this.username;
     }
-
-    public void setEmail(String email) {
-        this.email = email;
+    
+    public void setUsername(String username){
+        this.username = username;
     }
 
     public String getSenha() {

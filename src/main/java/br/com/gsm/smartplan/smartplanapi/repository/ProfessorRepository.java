@@ -19,5 +19,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface ProfessorRepository extends JpaRepository<Professor, Long>{
-    public Professor getByEmail(String email);
+    public Professor getByUsername(String username);
 }

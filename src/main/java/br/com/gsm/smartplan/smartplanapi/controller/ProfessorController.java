@@ -30,11 +30,11 @@ public class ProfessorController {
     private ProfessorRepository professorRepository;
 
     //Retorna dados de um determinado professor através do e-mail.
-    @RequestMapping(method = RequestMethod.GET, path = "/professor/executar_login/{email}/{senha}")
-    public ResponseEntity<?> login(@PathVariable("email") String email, @PathVariable("senha") String senha) {
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/executar_login/{username}/{senha}")
+    public ResponseEntity<?> login(@PathVariable("username") String username, @PathVariable("senha") String senha) {
         Professor professor;
         professor = Professor.getInstance();
-        professor = professorRepository.getByEmail(email);
+        professor = professorRepository.getByUsername(username);
         if (professor != null) {
             if (professor.getSenha().equals(senha)) {
                 return new ResponseEntity<>(professor, HttpStatus.OK);
@@ -70,7 +70,7 @@ public class ProfessorController {
                 .orElseThrow(() -> new ResourceNotFoundException("Professor", "professor", professor_id));
 
         professor.setNome(professor_details.getNome());
-        professor.setEmail(professor_details.getEmail());
+        professor.setUsername(professor_details.getUsername());
         professor.setSenha(professor_details.getSenha());
 
         return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
