@@ -24,7 +24,7 @@ public class Planejamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cor", nullable = true, columnDefinition = "default 1")
+    @Column(name = "cor", nullable = true)
     private Integer cor;
 
     @Column(name = "nome", nullable = false, length = 20)
