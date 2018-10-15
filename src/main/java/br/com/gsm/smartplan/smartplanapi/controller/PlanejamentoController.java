@@ -8,6 +8,8 @@ package br.com.gsm.smartplan.smartplanapi.controller;
 import br.com.gsm.smartplan.smartplanapi.exception.ResourceNotFoundException;
 import br.com.gsm.smartplan.smartplanapi.model.Planejamento;
 import br.com.gsm.smartplan.smartplanapi.repository.PlanejamentoRepository;
+import br.com.gsm.smartplan.smartplanapi.repository.ProfessorRepository;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlanejamentoController {
     
     @Autowired
+    private ProfessorRepository professorRepository;
+    
+    @Autowired
     private PlanejamentoRepository planejamentoRepository;
 
     //Retorna dados de um determinado planejamento.
@@ -43,8 +48,9 @@ public class PlanejamentoController {
     }
 
     //Cria um planejamento.
-    @RequestMapping(method = RequestMethod.POST, path = "/planejamento/insert")
-    public ResponseEntity<?> insertPlanejamento(@Valid @RequestBody Planejamento planejamento) {
+    @RequestMapping(method = RequestMethod.POST, path = "/planejamento/insert/{id}")
+    public ResponseEntity<?> insertPlanejamento(@Valid @RequestBody Planejamento planejamento, @PathVariable("id") Long id) {
+        planejamento.setProfessor(professorRepository.findById(id).get());
         return new ResponseEntity<>(planejamentoRepository.save(planejamento), HttpStatus.OK);
     }
 
@@ -74,5 +80,12 @@ public class PlanejamentoController {
         planejamentoRepository.delete(planejamento);
 
         return ResponseEntity.ok().build();
+    }
+    
+    //Retorna planejamentos de um determinado professor.
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}/planejamentos")
+    @Transactional
+    public ResponseEntity<?> getAllPlanejamentosByProfessorId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(planejamentoRepository.findByProfessorId(id), HttpStatus.OK);
     }
 }
