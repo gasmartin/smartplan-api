@@ -31,13 +31,21 @@ public class Nota {
     @JsonIgnore
     private Aluno aluno;
 
-    private static Nota instance;
-
-    public static Nota getInstance() {
-        if (instance == null) {
-            instance = new Nota();
-        }
-        return instance;
+//    private static Nota instance;
+//
+//    public static Nota getInstance() {
+//        if (instance == null) {
+//            instance = new Nota();
+//        }
+//        return instance;
+//    }
+    
+    public Nota(){
+        
+    }
+    
+    public Nota(Double nota){
+        this.nota = nota;
     }
 
     public Long getId() {
