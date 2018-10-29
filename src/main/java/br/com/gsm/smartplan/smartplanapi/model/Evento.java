@@ -44,13 +44,24 @@ public class Evento {
     @JsonIgnore
     private Planejamento planejamento;
 
-    private static Evento instance;
+//    private static Evento instance;
+//
+//    public static Evento getInstance() {
+//        if (instance == null) {
+//            instance = new Evento();
+//        }
+//        return instance;
+//    }
+    
+    public Evento(){
+        
+    }
 
-    public static Evento getInstance() {
-        if (instance == null) {
-            instance = new Evento();
-        }
-        return instance;
+    public Evento(String nome, String descricao, Character tipo, Date dataEvento) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.tipo = tipo;
+        this.dataEvento = dataEvento;
     }
 
     public Long getId() {

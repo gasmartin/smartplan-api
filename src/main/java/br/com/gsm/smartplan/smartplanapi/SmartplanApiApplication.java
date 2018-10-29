@@ -37,8 +37,5 @@ public class SmartplanApiApplication implements CommandLineRunner {
 
         String ip = InetAddress.getLocalHost().getHostAddress();
         log.info("IP do servidor: " + ip);
-        
-        long id = 1;
-        alunoRepository.findById(id).get().getNotas().add(new Nota(2.0));
     }
 }

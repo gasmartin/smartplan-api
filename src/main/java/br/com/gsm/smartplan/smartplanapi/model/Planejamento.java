@@ -44,13 +44,25 @@ public class Planejamento {
     @JsonIgnore
     private Professor professor;
 
-    private static Planejamento instance;
+//    private static Planejamento instance;
+//
+//    public static Planejamento getInstance() {
+//        if (instance == null) {
+//            instance = new Planejamento();
+//        }
+//        return instance;
+//    }
+    
+    public Planejamento(){
+        
+    }
 
-    public static Planejamento getInstance() {
-        if (instance == null) {
-            instance = new Planejamento();
-        }
-        return instance;
+    public Planejamento(Integer cor, String nome, String descricao, Date dataInicio, Date dataFinal) {
+        this.cor = cor;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.dataInicio = dataInicio;
+        this.dataFinal = dataFinal;
     }
 
     public Long getId() {
