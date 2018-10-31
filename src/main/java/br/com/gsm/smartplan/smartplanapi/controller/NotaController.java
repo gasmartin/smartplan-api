@@ -70,4 +70,10 @@ public class NotaController {
         
         return ResponseEntity.ok().build();
     }
+    
+    //Retornar as notas de um determinado aluno.
+    @RequestMapping(method = RequestMethod.GET, path = "/aluno/{id}/notas")
+    public ResponseEntity<?> getNotasByAlunoId(@PathVariable("id") Long aluno_id){
+        return new ResponseEntity<>(notaRepository.findByAlunoId(aluno_id), HttpStatus.OK);
+    }
 }

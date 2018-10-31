@@ -1,15 +1,7 @@
 package br.com.gsm.smartplan.smartplanapi;
 
-import br.com.gsm.smartplan.smartplanapi.model.Aluno;
-import br.com.gsm.smartplan.smartplanapi.model.Nota;
-import br.com.gsm.smartplan.smartplanapi.model.Professor;
-import br.com.gsm.smartplan.smartplanapi.model.Turma;
 import br.com.gsm.smartplan.smartplanapi.repository.AlunoRepository;
-import br.com.gsm.smartplan.smartplanapi.repository.ProfessorRepository;
-import br.com.gsm.smartplan.smartplanapi.repository.TurmaRepository;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.List;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
