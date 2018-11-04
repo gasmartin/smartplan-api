@@ -32,9 +32,7 @@ public class ProfessorController {
     //Retorna dados de um determinado professor através do e-mail.
     @RequestMapping(method = RequestMethod.GET, path = "/professor/executar_login/{username}/{senha}")
     public ResponseEntity<?> login(@PathVariable("username") String username, @PathVariable("senha") String senha) {
-        Professor professor;
-        professor = Professor.getInstance();
-        professor = professorRepository.getByUsername(username);
+        Professor professor = professorRepository.getByUsername(username);
         if (professor != null) {
             if (professor.getSenha().equals(senha)) {
                 return new ResponseEntity<>(professor, HttpStatus.OK);

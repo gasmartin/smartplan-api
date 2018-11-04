@@ -5,9 +5,6 @@ package br.com.gsm.smartplan.smartplanapi.model;
  * @author Gabriel San Martin
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.sql.Date;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -47,13 +43,25 @@ public class Planejamento {
     @JsonIgnore
     private Professor professor;
 
-    private static Planejamento instance;
+//    private static Planejamento instance;
+//
+//    public static Planejamento getInstance() {
+//        if (instance == null) {
+//            instance = new Planejamento();
+//        }
+//        return instance;
+//    }
+    
+    public Planejamento(){
+        
+    }
 
-    public static Planejamento getInstance() {
-        if (instance == null) {
-            instance = new Planejamento();
-        }
-        return instance;
+    public Planejamento(Integer cor, String nome, String descricao, String dataInicio, String dataFinal) {
+        this.cor = cor;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.dataInicio = dataInicio;
+        this.dataFinal = dataFinal;
     }
 
     public Long getId() {

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -24,20 +25,20 @@ public class Nota {
     private Long id;
 
     @Column(name = "nota")
+    @NotNull
     private Double nota;
 
     @ManyToOne
-    @JoinColumn(name = "aluno_id")
+    @JoinColumn(name = "aluno_id", nullable = false)
     @JsonIgnore
     private Aluno aluno;
-
-    private static Nota instance;
-
-    public static Nota getInstance() {
-        if (instance == null) {
-            instance = new Nota();
-        }
-        return instance;
+    
+    public Nota(){
+        
+    }
+    
+    public Nota(Double nota){
+        this.nota = nota;
     }
 
     public Long getId() {

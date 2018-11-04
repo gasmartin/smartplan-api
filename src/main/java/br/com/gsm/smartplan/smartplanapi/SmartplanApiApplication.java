@@ -1,9 +1,6 @@
 package br.com.gsm.smartplan.smartplanapi;
 
-import br.com.gsm.smartplan.smartplanapi.model.Professor;
-import br.com.gsm.smartplan.smartplanapi.model.Turma;
-import br.com.gsm.smartplan.smartplanapi.repository.ProfessorRepository;
-import br.com.gsm.smartplan.smartplanapi.repository.TurmaRepository;
+import br.com.gsm.smartplan.smartplanapi.repository.AlunoRepository;
 import java.net.InetAddress;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -19,10 +16,7 @@ public class SmartplanApiApplication implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(SmartplanApiApplication.class);
 
     @Autowired
-    private ProfessorRepository professorRepository;
-
-    @Autowired
-    private TurmaRepository turmaRepository;
+    private AlunoRepository alunoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(SmartplanApiApplication.class, args);
@@ -35,25 +29,5 @@ public class SmartplanApiApplication implements CommandLineRunner {
 
         String ip = InetAddress.getLocalHost().getHostAddress();
         log.info("IP do servidor: " + ip);
-    }
-
-    //Uils para apresentação
-    private Professor returnProfessor(String nome, String email, String senha) {
-        Professor professor = Professor.getInstance();
-        professor.setNome(nome);
-        //professor.setEmail(email);
-        professor.setSenha(senha);
-
-        return professor;
-    }
-
-    private Turma returnTurma(Integer cor, Integer sala, String nome, Long professorId) {
-        Turma turma = Turma.getInstance();
-        turma.setCor(cor);
-        turma.setSala(sala);
-        turma.setNome(nome);
-        turma.setProfessor(professorRepository.findById(professorId).get());
-
-        return turma;
     }
 }

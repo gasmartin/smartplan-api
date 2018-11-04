@@ -28,14 +28,24 @@ public class Professor {
 
     @Column(name = "senha", nullable = false, length = 20)
     private String senha;
+//
+//    private static Professor instance;
+//
+//    public static Professor getInstance() {
+//        if (instance == null) {
+//            instance = new Professor();
+//        }
+//        return instance;
+//    }
+    
+    public Professor(){
+        
+    }
 
-    private static Professor instance;
-
-    public static Professor getInstance() {
-        if (instance == null) {
-            instance = new Professor();
-        }
-        return instance;
+    public Professor(String nome, String username, String senha) {
+        this.nome = nome;
+        this.username = username;
+        this.senha = senha;
     }
 
     public Long getId() {

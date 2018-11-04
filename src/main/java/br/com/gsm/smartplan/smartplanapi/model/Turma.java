@@ -45,13 +45,24 @@ public class Turma {
     @JsonIgnore
     private Planejamento planejamento;
 
-    private static Turma instance;
+//    private static Turma instance;
+//
+//    public static Turma getInstance() {
+//        if (instance == null) {
+//            instance = new Turma();
+//        }
+//        return instance;
+//    }
+    
+    public Turma(){
+        
+    }
 
-    public static Turma getInstance() {
-        if (instance == null) {
-            instance = new Turma();
-        }
-        return instance;
+    public Turma(Integer cor, Integer sala, String nome, String descricao) {
+        this.cor = cor;
+        this.sala = sala;
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
     public Long getId() {
