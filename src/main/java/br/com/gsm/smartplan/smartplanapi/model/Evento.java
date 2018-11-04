@@ -1,7 +1,6 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -36,8 +33,7 @@ public class Evento {
     private Character tipo;
 
     @Column(name = "data_evento")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataEvento;
+    private String dataEvento;
 
     @ManyToOne
     @JoinColumn(name = "planejamento_id")
@@ -85,14 +81,6 @@ public class Evento {
         this.tipo = tipo;
     }
 
-    public Date getDataEvento() {
-        return dataEvento;
-    }
-
-    public void setDataEvento(Date dataEvento) {
-        this.dataEvento = dataEvento;
-    }
-
     public Planejamento getPlanejamento() {
         return planejamento;
     }
@@ -101,4 +89,11 @@ public class Evento {
         this.planejamento = planejamento;
     }
 
+    public String getDataEvento() {
+        return dataEvento;
+    }
+
+    public void setDataEvento(String dataEvento) {
+        this.dataEvento = dataEvento;
+    }
 }

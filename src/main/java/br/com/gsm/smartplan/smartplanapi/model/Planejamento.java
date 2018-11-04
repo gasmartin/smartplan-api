@@ -6,6 +6,8 @@ package br.com.gsm.smartplan.smartplanapi.model;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,10 +37,10 @@ public class Planejamento {
     private String descricao;
 
     @Column(name = "data_inicio")
-    private Date dataInicio;
+    private String dataInicio;
 
     @Column(name = "data_final")
-    private Date dataFinal;
+    private String dataFinal;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
@@ -85,19 +88,19 @@ public class Planejamento {
         this.descricao = descricao;
     }
 
-    public Date getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFinal() {
+    public String getDataFinal() {
         return dataFinal;
     }
 
-    public void setDataFinal(Date dataFinal) {
+    public void setDataFinal(String dataFinal) {
         this.dataFinal = dataFinal;
     }
 
@@ -108,5 +111,4 @@ public class Planejamento {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
-
 }
