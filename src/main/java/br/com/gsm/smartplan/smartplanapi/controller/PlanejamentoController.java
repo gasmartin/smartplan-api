@@ -7,6 +7,7 @@ package br.com.gsm.smartplan.smartplanapi.controller;
 
 import br.com.gsm.smartplan.smartplanapi.exception.ResourceNotFoundException;
 import br.com.gsm.smartplan.smartplanapi.model.Planejamento;
+import br.com.gsm.smartplan.smartplanapi.repository.EventoRepository;
 import br.com.gsm.smartplan.smartplanapi.repository.PlanejamentoRepository;
 import br.com.gsm.smartplan.smartplanapi.repository.ProfessorRepository;
 import javax.transaction.Transactional;
@@ -34,11 +35,20 @@ public class PlanejamentoController {
     
     @Autowired
     private PlanejamentoRepository planejamentoRepository;
+    
+    @Autowired
+    private EventoRepository eventoRepository;
 
     //Retorna dados de um determinado planejamento.
     @RequestMapping(method = RequestMethod.GET, path = "/planejamento/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(planejamentoRepository.findById(id), HttpStatus.OK);
+    }
+    
+    //Retorna dados de um determinado planejamento.
+    @RequestMapping(method = RequestMethod.GET, path = "/planejamento/{id}/eventos")
+    public ResponseEntity<?> getAllEventosByPlanejamentoId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(eventoRepository.findByPlanejamentoId(id), HttpStatus.OK);
     }
 
     //Retorna todos os planejamentos.

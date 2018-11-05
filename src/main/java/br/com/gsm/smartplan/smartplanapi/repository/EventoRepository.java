@@ -6,6 +6,7 @@
 package br.com.gsm.smartplan.smartplanapi.repository;
 
 import br.com.gsm.smartplan.smartplanapi.model.Evento;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +17,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface EventoRepository extends JpaRepository<Evento, Long>{
-    
+    public List<Evento> findByPlanejamentoId(Long planejamentoId);
 }
