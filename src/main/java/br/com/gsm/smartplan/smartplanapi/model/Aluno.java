@@ -1,7 +1,6 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
