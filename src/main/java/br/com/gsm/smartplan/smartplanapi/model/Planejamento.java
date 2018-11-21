@@ -23,9 +23,6 @@ public class Planejamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cor", nullable = true)
-    private Integer cor;
-
     @Column(name = "nome", nullable = false, length = 20)
     private String nome;
 
@@ -42,22 +39,12 @@ public class Planejamento {
     @JoinColumn(name = "professor_id")
     @JsonIgnore
     private Professor professor;
-
-//    private static Planejamento instance;
-//
-//    public static Planejamento getInstance() {
-//        if (instance == null) {
-//            instance = new Planejamento();
-//        }
-//        return instance;
-//    }
     
     public Planejamento(){
         
     }
 
-    public Planejamento(Integer cor, String nome, String descricao, String dataInicio, String dataFinal) {
-        this.cor = cor;
+    public Planejamento(String nome, String descricao, String dataInicio, String dataFinal) {
         this.nome = nome;
         this.descricao = descricao;
         this.dataInicio = dataInicio;
@@ -70,14 +57,6 @@ public class Planejamento {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getCor() {
-        return cor;
-    }
-
-    public void setCor(Integer cor) {
-        this.cor = cor;
     }
 
     public String getNome() {

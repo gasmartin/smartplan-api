@@ -26,9 +26,6 @@ public class Aluno {
     @Column(name = "nome", nullable = false, length = 20)
     private String nome;
 
-    @Column(name = "obs", nullable = true, length = 50)
-    private String obs;
-
     @Column(name = "email", nullable = true, length = 100)
     private String email;
        
@@ -36,23 +33,13 @@ public class Aluno {
     @JoinColumn(name = "turma_id")
     @JsonIgnore
     private Turma turma;
-
-//    private static Aluno instance;
-//
-//    public static Aluno getInstance() {
-//        if (instance == null) {
-//            instance = new Aluno();
-//        }
-//        return instance;
-//    }
     
     public Aluno(){
         
     }
 
-    public Aluno(String nome, String obs, String email) {
+    public Aluno(String nome, String email) {
         this.nome = nome;
-        this.obs = obs;
         this.email = email;
     }
 
@@ -70,14 +57,6 @@ public class Aluno {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getObs() {
-        return obs;
-    }
-
-    public void setObs(String obs) {
-        this.obs = obs;
     }
 
     public String getEmail() {

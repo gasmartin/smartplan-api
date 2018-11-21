@@ -30,7 +30,7 @@ public class Evento {
     private String descricao;
 
     @Column(name = "tipo")
-    private Character tipo;
+    private int tipo;
 
     @Column(name = "data_evento")
     private String dataEvento;
@@ -39,15 +39,6 @@ public class Evento {
     @JoinColumn(name = "planejamento_id")
     @JsonIgnore
     private Planejamento planejamento;
-
-//    private static Evento instance;
-//
-//    public static Evento getInstance() {
-//        if (instance == null) {
-//            instance = new Evento();
-//        }
-//        return instance;
-//    }
     
     public Evento(){
         
@@ -84,11 +75,11 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public Character getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(Character tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 

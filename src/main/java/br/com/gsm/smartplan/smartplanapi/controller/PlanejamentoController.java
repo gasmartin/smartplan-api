@@ -72,7 +72,6 @@ public class PlanejamentoController {
         Planejamento planejamento = planejamentoRepository.findById(planejamento_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Planejamento", "planejamento", planejamento_id));
 
-        planejamento.setCor(planejamento_details.getCor());
         planejamento.setNome(planejamento_details.getNome());
         planejamento.setDescricao(planejamento_details.getDescricao());
         planejamento.setDataInicio(planejamento_details.getDataInicio());

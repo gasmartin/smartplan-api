@@ -56,7 +56,6 @@ public class AlunoController {
                 .orElseThrow(() -> new ResourceNotFoundException("Aluno", "aluno", aluno_id));
 
         aluno.setNome(aluno_details.getNome());
-        aluno.setObs(aluno_details.getObs());
         aluno.setEmail(aluno_details.getEmail());
 
         //TALVEZ UM SET PARA AS NOTAS AQUI

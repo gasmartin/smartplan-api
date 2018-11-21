@@ -31,15 +31,6 @@ public class Professor {
 
     @Column(name = "senha", nullable = false, length = 20)
     private String senha;
-//
-//    private static Professor instance;
-//
-//    public static Professor getInstance() {
-//        if (instance == null) {
-//            instance = new Professor();
-//        }
-//        return instance;
-//    }
     
     public Professor(){
         

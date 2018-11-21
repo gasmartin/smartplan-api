@@ -61,7 +61,6 @@ public class TurmaController {
         Turma turma = turmaRepository.findById(turma_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Turma", "turma", turma_id));
         
-        turma.setCor(turma_details.getCor());
         turma.setSala(turma_details.getSala());
         turma.setNome(turma_details.getNome());
 

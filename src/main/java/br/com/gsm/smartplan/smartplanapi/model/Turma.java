@@ -23,17 +23,11 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "cor", nullable = true)
-    private Integer cor;
-
     @Column(name = "sala", nullable = true)
-    private Integer sala;
+    private int sala;
 
     @Column(name = "nome", nullable = false, length = 20)
     private String nome;
-    
-    @Column(name = "descricao", nullable = true, length = 100)
-    private String descricao;
 
     @ManyToOne
     @JoinColumn(name = "professor_id")
@@ -44,25 +38,14 @@ public class Turma {
     @JoinColumn(name = "planejamento_id")
     @JsonIgnore
     private Planejamento planejamento;
-
-//    private static Turma instance;
-//
-//    public static Turma getInstance() {
-//        if (instance == null) {
-//            instance = new Turma();
-//        }
-//        return instance;
-//    }
     
     public Turma(){
         
     }
 
-    public Turma(Integer cor, Integer sala, String nome, String descricao) {
-        this.cor = cor;
+    public Turma(int cor, Integer sala, String nome, String descricao) {
         this.sala = sala;
         this.nome = nome;
-        this.descricao = descricao;
     }
 
     public Long getId() {
@@ -73,19 +56,11 @@ public class Turma {
         this.id = id;
     }
 
-    public Integer getCor() {
-        return cor;
-    }
-
-    public void setCor(Integer cor) {
-        this.cor = cor;
-    }
-
-    public Integer getSala() {
+    public int getSala() {
         return sala;
     }
 
-    public void setSala(Integer sala) {
+    public void setSala(int sala) {
         this.sala = sala;
     }
 
@@ -112,12 +87,5 @@ public class Turma {
     public void setPlanejamento(Planejamento planejamento) {
         this.planejamento = planejamento;
     }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+    
 }
