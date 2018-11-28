@@ -1,10 +1,14 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,21 +29,17 @@ public class Professor {
     
     @Column(name = "email", nullable = true, length = 35)
     private String email;
-
-    @Column(name = "username", unique = true, nullable = false, length = 20)
-    private String username;
-
-    @Column(name = "senha", nullable = false, length = 20)
-    private String senha;
     
-    public Professor(){
-        
-    }
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "professor")
+    @JsonIgnore
+    private Usuario usuario;
+    
+    public Professor(){}
 
-    public Professor(String nome, String username, String senha) {
+    public Professor(String nome, String email) {
         this.nome = nome;
-        this.username = username;
-        this.senha = senha;
+        this.email = email;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -65,21 +65,13 @@ public class Professor {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    public String getUsername(){
-        return this.username;
-    }
-    
-    public void setUsername(String username){
-        this.username = username;
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

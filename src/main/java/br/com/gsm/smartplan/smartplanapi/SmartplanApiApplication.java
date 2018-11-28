@@ -1,6 +1,9 @@
 package br.com.gsm.smartplan.smartplanapi;
 
-import br.com.gsm.smartplan.smartplanapi.repository.AlunoRepository;
+import br.com.gsm.smartplan.smartplanapi.model.Professor;
+import br.com.gsm.smartplan.smartplanapi.model.Usuario;
+import br.com.gsm.smartplan.smartplanapi.repository.ProfessorRepository;
+import br.com.gsm.smartplan.smartplanapi.repository.UsuarioRepository;
 import java.net.InetAddress;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -16,7 +19,10 @@ public class SmartplanApiApplication implements CommandLineRunner {
     private static final Logger log = LoggerFactory.getLogger(SmartplanApiApplication.class);
 
     @Autowired
-    private AlunoRepository alunoRepository;
+    private ProfessorRepository pr;
+    
+    @Autowired
+    private UsuarioRepository ur;
 
     public static void main(String[] args) {
         SpringApplication.run(SmartplanApiApplication.class, args);

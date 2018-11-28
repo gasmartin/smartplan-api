@@ -5,19 +5,16 @@
  */
 package br.com.gsm.smartplan.smartplanapi.repository;
 
-
-import br.com.gsm.smartplan.smartplanapi.model.Professor;
-import br.com.gsm.smartplan.smartplanapi.model.Turma;
-import java.util.List;
+import br.com.gsm.smartplan.smartplanapi.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Gabriel San Martin
  */
 
-@Component
-public interface ProfessorRepository extends JpaRepository<Professor, Long>{
-    //public Professor getByUsername(String username);
+@Repository
+public interface UsuarioRepository extends JpaRepository<Usuario, String>{
+    
 }

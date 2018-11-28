@@ -29,18 +29,6 @@ public class ProfessorController {
     @Autowired
     private ProfessorRepository professorRepository;
 
-    //Retorna dados de um determinado professor através do e-mail.
-    @RequestMapping(method = RequestMethod.GET, path = "/professor/executar_login/{username}/{senha}")
-    public ResponseEntity<?> login(@PathVariable("username") String username, @PathVariable("senha") String senha) {
-        Professor professor = professorRepository.getByUsername(username);
-        if (professor != null) {
-            if (professor.getSenha().equals(senha)) {
-                return new ResponseEntity<>(professor, HttpStatus.OK);
-            }
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
-
     //Retorna dados de um determinado professor.
     @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
@@ -67,9 +55,10 @@ public class ProfessorController {
         Professor professor = professorRepository.findById(professor_id)
                 .orElseThrow(() -> new ResourceNotFoundException("Professor", "professor", professor_id));
 
+        //ATUALIZAR
+        
         professor.setNome(professor_details.getNome());
-        professor.setUsername(professor_details.getUsername());
-        professor.setSenha(professor_details.getSenha());
+        professor.setEmail(professor_details.getEmail());
 
         return new ResponseEntity<>(professorRepository.save(professor), HttpStatus.OK);
     }
