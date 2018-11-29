@@ -6,6 +6,7 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,9 +30,8 @@ public class Usuario {
     @Column(name = "password", nullable = false, length = 20)
     private String password;
     
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "professor_id", nullable = false)
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "professor_id", referencedColumnName = "id")
     private Professor professor;
     
     public Usuario(){}

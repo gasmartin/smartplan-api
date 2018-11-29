@@ -1,6 +1,8 @@
 package br.com.gsm.smartplan.smartplanapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -28,6 +31,10 @@ public class Aluno {
 
     @Column(name = "email", nullable = true, length = 100)
     private String email;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "aluno_id", referencedColumnName = "id")
+    private List<Nota> notas;
        
     @ManyToOne
     @JoinColumn(name = "turma_id")
@@ -75,4 +82,12 @@ public class Aluno {
         this.turma = turma;
     }
 
+    public List<Nota> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<Nota> notas) {
+        this.notas = notas;
+    }
+    
 }

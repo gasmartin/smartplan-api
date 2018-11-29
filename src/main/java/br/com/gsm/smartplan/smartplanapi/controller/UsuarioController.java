@@ -35,7 +35,7 @@ public class UsuarioController {
     
     //Retorna dados de um determinado professor através do e-mail.
     @RequestMapping(method = RequestMethod.GET, path = "/usuario/executar_login/{username}/{password}")
-    public ResponseEntity<?> login(@PathVariable("username") String username, @PathVariable("senha") String password) {
+    public ResponseEntity<?> login(@PathVariable("username") String username, @PathVariable("password") String password) {
         Usuario usuario = usuarioRepository.findById(username).get();
         if (usuario != null) {
             if (usuario.getPassword().equals(password)) {
@@ -46,10 +46,10 @@ public class UsuarioController {
     }
         
     //Insere um usuário
-    @RequestMapping(method = RequestMethod.POST, path = "usuario/insert/{professor_id}")
-    public ResponseEntity<?> insertUsuario(@Valid @RequestBody Usuario usuario, @PathVariable("professor_id") Long professor_id){
-        Professor professor = professorRepository.findById(professor_id).get();
-        professor.setUsuario(usuario);
-        return new ResponseEntity<Professor>(professorRepository.save(professor), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.POST, path = "/usuario/insert/{id}")
+    public ResponseEntity<?> insert(@Valid @RequestBody Usuario usuario, @PathVariable("id") Long id){
+        Professor professor = professorRepository.findById(id).get();
+        usuario.setProfessor(professor);
+        return new ResponseEntity<>(usuarioRepository.save(usuario), HttpStatus.OK);
     }
 }

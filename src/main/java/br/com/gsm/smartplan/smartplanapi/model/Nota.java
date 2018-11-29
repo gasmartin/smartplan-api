@@ -27,11 +27,9 @@ public class Nota {
     @Column(name = "nota")
     @NotNull
     private Double nota;
-
-    @ManyToOne
-    @JoinColumn(name = "aluno_id", nullable = false)
-    @JsonIgnore
-    private Aluno aluno;
+    
+    @Column(name = "aluno_id")
+    private Long alunoId;
     
     public Nota(){
         
@@ -57,12 +55,12 @@ public class Nota {
         this.nota = nota;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public Long getAlunoId() {
+        return alunoId;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setAlunoId(Long alunoId) {
+        this.alunoId = alunoId;
     }
 
 }

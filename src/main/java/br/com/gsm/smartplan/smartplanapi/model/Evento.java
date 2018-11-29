@@ -34,11 +34,9 @@ public class Evento {
 
     @Column(name = "data_evento")
     private String dataEvento;
-
-    @ManyToOne
-    @JoinColumn(name = "planejamento_id")
-    @JsonIgnore
-    private Planejamento planejamento;
+    
+    @Column(name = "planejamento_id")
+    private Long planejamentoId;
     
     public Evento(){
         
@@ -83,14 +81,6 @@ public class Evento {
         this.tipo = tipo;
     }
 
-    public Planejamento getPlanejamento() {
-        return planejamento;
-    }
-
-    public void setPlanejamento(Planejamento planejamento) {
-        this.planejamento = planejamento;
-    }
-
     public String getDataEvento() {
         return dataEvento;
     }
@@ -98,4 +88,13 @@ public class Evento {
     public void setDataEvento(String dataEvento) {
         this.dataEvento = dataEvento;
     }
+
+    public Long getPlanejamentoId() {
+        return planejamentoId;
+    }
+
+    public void setPlanejamentoId(Long planejamentoId) {
+        this.planejamentoId = planejamentoId;
+    }
+    
 }
