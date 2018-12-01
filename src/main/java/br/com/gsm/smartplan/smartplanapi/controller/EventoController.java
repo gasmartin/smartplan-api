@@ -7,7 +7,10 @@ package br.com.gsm.smartplan.smartplanapi.controller;
 
 import br.com.gsm.smartplan.smartplanapi.exception.ResourceNotFoundException;
 import br.com.gsm.smartplan.smartplanapi.model.Evento;
+import br.com.gsm.smartplan.smartplanapi.model.Planejamento;
 import br.com.gsm.smartplan.smartplanapi.repository.EventoRepository;
+import br.com.gsm.smartplan.smartplanapi.repository.PlanejamentoRepository;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,9 +28,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class EventoController {
-
+    
     @Autowired
     private EventoRepository eventoRepository;
+    
+     @Autowired
+    private PlanejamentoRepository planejamentoRepository;
 
     //Retorna dados de um determinado evento.
     @RequestMapping(method = RequestMethod.GET, path = "/evento/{id}")
@@ -40,11 +46,15 @@ public class EventoController {
     public ResponseEntity<?> listOfEventos() {
         return new ResponseEntity<>(eventoRepository.findAll(), HttpStatus.OK);
     }
-
+    
     //Cria um evento.
-    @RequestMapping(method = RequestMethod.POST, path = "/evento/insert")
-    public ResponseEntity<?> insertEvento(@Valid @RequestBody Evento evento) {
-        return new ResponseEntity<>(eventoRepository.save(evento), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.POST, path = "/planejamento/{id}/eventos/insert")
+    public ResponseEntity<?> insertEvento(@PathVariable("id") Long id, @Valid @RequestBody Evento evento) {
+        Planejamento planejamento = planejamentoRepository.findById(id).get();
+        List<Evento> evs = planejamento.getEventos();
+        evs.add(evento);
+        planejamento.setEventos(evs);
+        return new ResponseEntity<>(planejamentoRepository.save(planejamento), HttpStatus.OK);
     }
 
     //Atualiza um determinado evento.
@@ -68,4 +78,11 @@ public class EventoController {
 
         return ResponseEntity.ok().build();
     }
+    
+    //Retorna eventos de um determinado planejamento.
+    @RequestMapping(method = RequestMethod.GET, path = "/planejamento/{id}/eventos")
+    public ResponseEntity<?> getAllEventosByPlanejamentoId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(planejamentoRepository.findById(id).get().getEventos(), HttpStatus.OK);
+    }
+    
 }

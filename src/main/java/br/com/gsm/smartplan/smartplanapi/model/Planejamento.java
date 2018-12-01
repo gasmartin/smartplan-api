@@ -26,7 +26,7 @@ public class Planejamento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "nome", nullable = false, length = 20)
+    @Column(name = "nome", nullable = false, length = 40)
     private String nome;
 
     @Column(name = "descricao", nullable = true, length = 100)
@@ -40,6 +40,7 @@ public class Planejamento {
     
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "planejamento_id", referencedColumnName = "id")
+    //@JsonIgnore
     private List<Evento> eventos;
 
     @ManyToOne

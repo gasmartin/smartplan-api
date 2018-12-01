@@ -44,12 +44,6 @@ public class PlanejamentoController {
     public ResponseEntity<?> getById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(planejamentoRepository.findById(id), HttpStatus.OK);
     }
-    
-    //Retorna dados de um determinado planejamento.
-    @RequestMapping(method = RequestMethod.GET, path = "/planejamento/{id}/eventos")
-    public ResponseEntity<?> getAllEventosByPlanejamentoId(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(eventoRepository.findByPlanejamentoId(id), HttpStatus.OK);
-    }
 
     //Retorna todos os planejamentos.
     @RequestMapping(method = RequestMethod.GET, path = "/planejamento")
