@@ -64,7 +64,7 @@ public class AlunoController {
         return new ResponseEntity<>(alunoRepository.save(aluno), HttpStatus.OK);
     }
 
-    //Deleta um planejamento.
+    //Deleta um aluno.
     @RequestMapping(method = RequestMethod.DELETE, path = "/aluno/{id}")
     public ResponseEntity<?> deleteAluno(@PathVariable("id") Long aluno_id) {
         Aluno aluno = alunoRepository.findById(aluno_id)
@@ -73,5 +73,11 @@ public class AlunoController {
         alunoRepository.delete(aluno);
 
         return ResponseEntity.ok().build();
+    }
+    
+    //Retorna os alunos de uma determinada turma
+    @RequestMapping(method = RequestMethod.GET, path = "/turma/{id}/alunos")
+    public ResponseEntity<?> getAlunosByTurmaId(@PathVariable("id") Long id){
+        return new ResponseEntity<>(alunoRepository.findByTurmaId(id), HttpStatus.OK);
     }
 }
