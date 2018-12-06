@@ -36,10 +36,9 @@ public class Aluno {
     @JoinColumn(name = "aluno_id", referencedColumnName = "id")
     private List<Nota> notas;
        
-    @ManyToOne
-    @JoinColumn(name = "turma_id")
+    @Column(name = "turma_id")
     @JsonIgnore
-    private Turma turma;
+    private Long turmaId;
     
     public Aluno(){
         
@@ -74,20 +73,20 @@ public class Aluno {
         this.email = email;
     }
 
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
-
     public List<Nota> getNotas() {
         return notas;
     }
 
     public void setNotas(List<Nota> notas) {
         this.notas = notas;
+    }
+
+    public Long getTurmaId() {
+        return turmaId;
+    }
+
+    public void setTurmaId(Long turmaId) {
+        this.turmaId = turmaId;
     }
     
 }
