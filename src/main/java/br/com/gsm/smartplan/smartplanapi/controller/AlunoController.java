@@ -7,7 +7,11 @@ package br.com.gsm.smartplan.smartplanapi.controller;
 
 import br.com.gsm.smartplan.smartplanapi.exception.ResourceNotFoundException;
 import br.com.gsm.smartplan.smartplanapi.model.Aluno;
+import br.com.gsm.smartplan.smartplanapi.model.Turma;
 import br.com.gsm.smartplan.smartplanapi.repository.AlunoRepository;
+import br.com.gsm.smartplan.smartplanapi.repository.TurmaRepository;
+import java.util.List;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +30,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class AlunoController {
 
+    @Autowired
+    private TurmaRepository turmaRepository;
+    
     @Autowired
     private AlunoRepository alunoRepository;
 
@@ -79,5 +86,15 @@ public class AlunoController {
     @RequestMapping(method = RequestMethod.GET, path = "/turma/{id}/alunos")
     public ResponseEntity<?> getAlunosByTurmaId(@PathVariable("id") Long id){
         return new ResponseEntity<>(alunoRepository.findByTurmaId(id), HttpStatus.OK);
+    }
+    
+    //Retorna o número de alunos que o professor possui.
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}/turmas/alunos/count")
+    @Transactional
+    public ResponseEntity<?> getNumberOfTurmasByProfessorId(@PathVariable("id") Long id) {
+        List<Turma> turmas = turmaRepository.findByProfessorId(id);
+        int count = 0;
+        for(Turma t : turmas) count += t.getAlunos().size();
+        return new ResponseEntity<>(count, HttpStatus.OK);
     }
 }

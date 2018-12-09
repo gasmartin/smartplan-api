@@ -91,4 +91,11 @@ public class PlanejamentoController {
     public ResponseEntity<?> getAllPlanejamentosByProfessorId(@PathVariable("id") Long id) {
         return new ResponseEntity<>(planejamentoRepository.findByProfessorId(id), HttpStatus.OK);
     }
+    
+    //Retorna o número de planejamentos de um determinado professor.
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}/planejamentos/count")
+    @Transactional
+    public ResponseEntity<?> getNumberOfPlanejamentosByProfessorId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(planejamentoRepository.findByProfessorId(id).size(), HttpStatus.OK);
+    }
 }

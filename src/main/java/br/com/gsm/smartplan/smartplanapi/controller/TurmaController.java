@@ -84,4 +84,11 @@ public class TurmaController {
     public ResponseEntity<?> getAllTurmasByProfessorId(@PathVariable("id") Long id) {
         return new ResponseEntity<>(turmaRepository.findByProfessorId(id), HttpStatus.OK);
     }
+    
+    //Retorna o número de turmas de um determinado professor.
+    @RequestMapping(method = RequestMethod.GET, path = "/professor/{id}/turmas/count")
+    @Transactional
+    public ResponseEntity<?> getNumberOfTurmasByProfessorId(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(turmaRepository.findByProfessorId(id).size(), HttpStatus.OK);
+    }
 }
